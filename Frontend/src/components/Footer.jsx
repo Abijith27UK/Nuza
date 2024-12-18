@@ -73,7 +73,7 @@ const Footer = () => {
                 {/* Right Section: For Business */}
                 <div className="w-full md:w-1/3 text-right space-y-3 ">
                     <h4 className="text-lg font-bold mb-2">For Business</h4>
-                    <ul className="space-y-1 text-sm">
+                    <ul className="space-y-1 text-sm text">
                         <li>
                             <a href="#" className="hover:underline">
                                 For partners

@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiMapPin } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import { IoListCircleOutline } from "react-icons/io5";
-import { FiSearch, FiChevronDown  } from "react-icons/fi";
+import { FiSearch } from "react-icons/fi";
+import { PiLineVertical } from "react-icons/pi";
 import { IoIosArrowDropright } from "react-icons/io";
 import { FaFilter } from "react-icons/fa";
 
@@ -14,6 +15,7 @@ const Dashboard = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
+    const [add,setAdd] = useState('Has value');
     
 
     // useEffect(() => {
@@ -29,19 +31,35 @@ const Dashboard = () => {
     //     return () => window.removeEventListener("scroll", handleScroll);
     // }, []);
 
-    useEffect(() => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const { latitude, longitude } = position.coords;
-                    setLocation("Mogappair, Chennai"); // Placeholder location
-                },
-                () => setLocation("Unable to fetch location")
-            );
-        } else {
-            setLocation("Geolocation not supported");
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(
+    //             (position) => {
+    //                 const { latitude, longitude } = position.coords;
+    //                 setLocation("Mogappair, Chennai"); // Placeholder location
+    //             },
+    //             () => setLocation("Unable to fetch location")
+    //         );
+    //     } else {
+    //         setLocation("Geolocation not supported");
+    //     }
+    // }, []);
+    useEffect(()=>{
+        navigator.geolocation.getCurrentPosition(pos=>{
+            const {latitude,longitude} = pos.coords;
+            console.log(latitude,longitude)
+            const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+            fetch(url).then(res=>res.json()).then(data=>{
+                if (data && data.address) {
+                    setLocation(data.address.county);
+                    setAdd(data.address);
+                    console.log("Address:", data.address);
+                } else {
+                    console.error("No address data found");
+                }
+            })
+        })
+    },[]);
 
     const newToNuza = [
         { id: 1, name: "Elite Salon", location: "Tambaram, Chennai", rating: 4.5, img: "https://static.wixstatic.com/media/00f32e_56c5f7d759464abca9dffddf11132ee3~mv2.png/v1/fill/w_640,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/00f32e_56c5f7d759464abca9dffddf11132ee3~mv2.png" },
@@ -146,31 +164,11 @@ const Dashboard = () => {
                         {/* Search Bar Wrapper */}
                         <div className="relative flex-1 bg-white rounded-full border border-purple-300 flex items-center px-4 py-2">
                             {/* Location with Dropdown */}
-                            <div
-                                className="flex items-center text-indigo-600 cursor-pointer"
-                                onClick={toggleDropdown} // Toggle the dropdown on click
-                            >
+                            <div className="flex items-center text-indigo-600 cursor-pointer">                            
                                 <FiMapPin className="text-xl mr-2" />
                                 <span className="text-sm font-medium">{location}</span>
-                                <FiChevronDown className="ml-2 text-sm text-indigo-600" />
+                                <PiLineVertical className="ml-2 text-4xl text-indigo-600" />
                             </div>
-
-                            {/* Dropdown Menu (Shows when clicked) */}
-                            {isDropdownOpen && (
-                                <div className="absolute bg-white border rounded-lg shadow-md top-full left-0 w-full mt-2 z-10">
-                                    {/* Example options */}
-                                    <div className="p-2 text-sm hover:bg-indigo-100 cursor-pointer rounded-lg">
-                                    Adyar, Chennai
-                                    </div>
-                                    <div className="p-2 text-sm hover:bg-indigo-100 cursor-pointer rounded-lg">
-                                    T Nagar, Chennai
-                                    </div>
-                                    <div className="p-2 text-sm hover:bg-indigo-100 cursor-pointer v">
-                                    Velachery, Chennai
-                                    </div>
-                                </div>
-                            )}
-
                             {/* Search Input */}
                             <input
                                 type="text"

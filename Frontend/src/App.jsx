@@ -23,7 +23,7 @@ const App = () => {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/payment" element={<PaymentPage />} />
             </Routes>
-            {noNavbarRoutes.includes(location.pathname) && <Footer />}
+            <Footer />
             
         </>
     );
