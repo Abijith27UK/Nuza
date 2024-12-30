@@ -6,22 +6,49 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import Dashboard from "./pages/Dashboard";
 import PaymentPage from "./pages/PaymentPage";
+import TopNavBar from "./pages/TopNavbar";
+import Categories from "./pages/Categories";
+import NearNuzaPage from "./pages/NearNuzaPage";
+
 
 const App = () => {
     const location = useLocation();
-
     // Define routes where Navbar should NOT appear
-    const noNavbarRoutes = ["/dashboard"];
+    const noNavbarRoutes = ["/dashboard", "/payment","/near-you"];    
 
     return (
         <>
             {/* Render Navbar only if the current route is NOT in noNavbarRoutes */}
             {!noNavbarRoutes.includes(location.pathname) && <Navbar />}
             <Routes>
-                <Route path="/" element={<LoginPage />} />
+            <Route path="/" element={<LoginPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/payment" element={<PaymentPage />} />
+                <Route 
+                    path="/dashboard" 
+                    element={
+                        <>
+                            <TopNavBar />
+                            <Categories />
+                            <Dashboard />
+                        </>
+                    } 
+                />
+                <Route path="/payment" element={
+                    <>
+                    <TopNavBar />
+                    <Categories />
+                    <PaymentPage />
+                    </>                    
+                    } 
+                />
+                <Route path="/near-you" element={
+                    <>
+                    <TopNavBar />
+                    <Categories />
+                    <NearNuzaPage />
+                    </>
+                    } 
+                />
             </Routes>
             <Footer />
             

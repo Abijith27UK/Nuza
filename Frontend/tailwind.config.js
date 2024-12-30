@@ -5,7 +5,16 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif'],
+        orbitron: ['Orbitron', 'sans-serif'],
+        rubikVinyl: ['Rubik Vinyl', 'cursive'],
+        spicyRice: ['Spicy Rice', 'cursive'],
+        badScript: ['Bad Script', 'cursive'], 
+        cinzelDecorative: ['Cinzel Decorative', 'serif'],
+      },
+    },
   },
   plugins: [],
 }

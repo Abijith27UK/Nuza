@@ -1,18 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaLinkedin, FaYoutube, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
+    useEffect(() => {
+        const handleResize = () => {
+            const isMobile = window.innerWidth < 768; // Tailwind's `md` breakpoint
+            const company = document.querySelector("#company");
+            const forBusiness = document.querySelector("#for-business");
+            const nuzaBranding = document.querySelector("#nuza-branding");
+
+            if (isMobile) {
+                company.style.order = "1";
+                forBusiness.style.order = "2";
+                nuzaBranding.style.order = "3";
+            } else {
+                company.style.order = "0";
+                forBusiness.style.order = "0";
+                nuzaBranding.style.order = "0";
+            }
+        };
+
+        // Add event listener on resize
+        window.addEventListener("resize", handleResize);
+        // Initial call
+        handleResize();
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
     return (
         <footer
             style={{
-                background: "linear-gradient(to right, #5c28c5, #c93cb7, #5c28c5)", 
+                background: "linear-gradient(to right, #5c28c5, #c93cb7, #5c28c5)",
                 fontFamily: "'Poppins', sans-serif",
             }}
             className="text-white py-8"
         >
             <div className="container mx-auto px-4 flex flex-wrap justify-between items-start text-center">
                 {/* Left Section: Company */}
-                <div className="w-full md:w-1/3 text-left space-y-3">
+                <div id="company" className="w-full md:w-1/3 text-left space-y-3">
                     <h4 className="text-lg font-bold mb-2">Company</h4>
                     <ul className="space-y-1 text-sm">
                         <li>
@@ -34,7 +62,7 @@ const Footer = () => {
                 </div>
 
                 {/* Center Section: NUZA Branding */}
-                <div className="w-full md:w-1/3 flex flex-col items-center space-y-4">
+                <div id="nuza-branding" className="w-full md:w-1/3 flex flex-col items-center space-y-4">
                     <div>
                         <p className="text-lg font-medium">Incubated in</p>
                         {/* Placeholder for Images */}
@@ -56,7 +84,7 @@ const Footer = () => {
                         </div>
                     </div>
                     {/* NUZA Text */}
-                    <div className="text-5xl font-bold tracking-wide">NUZA</div>
+                    <div className="text-5xl font-badScript font-bold tracking-wide">NUZA</div>
                     {/* Address */}
                     <p className="text-sm leading-relaxed">
                         Nuza, Sudha & Shankar Innovation Hub,<br />
@@ -71,7 +99,7 @@ const Footer = () => {
                 </div>
 
                 {/* Right Section: For Business */}
-                <div className="w-full md:w-1/3 text-right space-y-3 ">
+                <div id="for-business" className="w-full md:w-1/3 text-right space-y-3 ">
                     <h4 className="text-lg font-bold mb-2">For Business</h4>
                     <ul className="space-y-1 text-sm text">
                         <li>

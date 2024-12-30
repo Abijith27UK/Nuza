@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&family=Rubik+Vinyl&family=Spicy+Rice&family=Bad+Script&family=Cinzel+Decorative&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1, h2, h3 {
+    @apply font-orbitron  bg-clip-text ;
+}
+
+/* Custom Scrollbar Hide Styles */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
