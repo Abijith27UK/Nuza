@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { FaLinkedin, FaYoutube, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
@@ -44,9 +45,7 @@ const Footer = () => {
                     <h4 className="text-lg font-bold mb-2">Company</h4>
                     <ul className="space-y-1 text-sm">
                         <li>
-                            <a href="#" className="hover:underline">
-                                About us
-                            </a>
+                        <Link to="/about" className="hover:underline">About us</Link>
                         </li>
                         <li>
                             <a href="#" className="hover:underline">

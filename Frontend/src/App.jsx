@@ -9,6 +9,7 @@ import PaymentPage from "./pages/PaymentPage";
 import TopNavBar from "./pages/TopNavbar";
 import Categories from "./pages/Categories";
 import NearNuzaPage from "./pages/NearNuzaPage";
+import About from "./pages/About";
 
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
             <Routes>
             <Route path="/" element={<LoginPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/about" element={<About />} />
                 <Route 
                     path="/dashboard" 
                     element={
